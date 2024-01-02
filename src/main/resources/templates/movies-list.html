@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+</head>
+<body>
+
+<h2>Movies</h2>
+
+<form th:action="@{/searchMovies}" method="get">
+    <label for="search">Search:</label>
+    <input type="text" id="search" name="search" th:value="${searchTerm}" >
+    <button type="submit">Search</button>
+</form>
+<br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Details</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="movie : ${movies}">
+        <td th:text="${movie.movie_ID}"></td>
+        <td th:text="${movie.name}"></td>
+        <td>
+            <a th:href="@{'/movieDetails/' + ${movie.movie_ID}}">Details</a>
+        </td>
+        <td>
+            <a th:href="@{'/deleteMovie/' + ${movie.movie_ID}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a th:href="@{/movieForm}">
+    <button type="button">Add New Movie</button>
+</a>
+
+
+</body>
+</html>
